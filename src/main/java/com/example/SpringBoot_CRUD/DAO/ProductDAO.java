@@ -53,4 +53,18 @@ public class ProductDAO {
 
     }
 
+    public void addProduct(Product product){
+        String SQL= "INSERT INTO products (product_name,cost,product_provider) values (?,?,?)";
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(SQL);
+            prepStatement.setString(1,product.getProductName());
+            prepStatement.setFloat(2,product.getCost());
+            prepStatement.setString(3,product.getProvider());
+
+            prepStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -10,7 +10,7 @@ public class Product {
     @Size(min=3,max=30,message="name of product should be between 3 and 30 characters ")
     private String productName;
 
-    @NotEmpty(message ="Product cost should not be empty")
+
     @Min(0)
     private float cost;
 

@@ -27,11 +27,12 @@
     <div th:each="product : ${products}">
         <tr>
             <td th:text="${product.getId()}"></td>
-            <td th:href="@{/products/{id}(id=${product.getId()})}" th:text="${product.getProductName()}"></td>
-            <td th:text="${product.getCost()}"></td>
+            <td>
+                <a th:href="@{/products/{id}(id=${product.getId()})}" th:text="${product.getProductName()}"></a>
+            </td>
+            <td th:text="${product.getCost()} + '$'"></td>
             <td th:text="${product.getProvider()}"></td>
         </tr>
-        <!--<a th:href="@{/products/{id}(id=${product.getId()})}" th:text="${product.getProductName()} + ' ' + ${product.getCost()} + '  ' + ${product.getProvider()}">NOTHING</a>-->
     </div>
     </tbody>
 
@@ -41,5 +42,10 @@
     </tr>
     </tfoot>
 </table>
+<br>
+<hr/>
+<form th:method="GET" th:action="@{/products/new}">
+    <input type="submit" value="Add new product">
+</form>
 </body>
 </html>
