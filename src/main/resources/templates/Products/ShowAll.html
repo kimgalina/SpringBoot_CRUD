@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "apple-touch-icon" href = "icon2.png">
+    <link rel = "stylesheet" href = "tablesstyle.css">
+    <title>Products list</title>
+</head>
+<body>
+<table th:boder="1" th:width="500" >
+    <!--заголоаок таблицы -->
+    <caption >Products </caption>
+    <thead>
+    <tr>
+        <!-- table row-->
+        <!-- создает одну строку таблицы -->
+        <!--td = table data -->
+        <th>ID</th>
+        <th>Product name</th>
+        <th>Cost </th>
+        <th>Product provider</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <div th:each="product : ${products}">
+        <tr>
+            <td th:text="${product.getId()}"></td>
+            <td th:href="@{/products/{id}(id=${product.getId()})}" th:text="${product.getProductName()}"></td>
+            <td th:text="${product.getCost()}"></td>
+            <td th:text="${product.getProvider()}"></td>
+        </tr>
+        <!--<a th:href="@{/products/{id}(id=${product.getId()})}" th:text="${product.getProductName()} + ' ' + ${product.getCost()} + '  ' + ${product.getProvider()}">NOTHING</a>-->
+    </div>
+    </tbody>
+
+    <tfoot>
+    <tr>
+        <td></td>
+    </tr>
+    </tfoot>
+</table>
+</body>
+</html>
