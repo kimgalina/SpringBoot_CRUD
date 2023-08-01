@@ -53,6 +53,29 @@ public class ProductDAO {
 
     }
 
+    public Product findById(int id){
+        Product product = null;
+        String SQL= "SELECT *FROM products WHERE id=?";
+        try {
+            PreparedStatement prepStatement = connection.prepareStatement(SQL);
+            prepStatement.setInt(1,id);
+            ResultSet result = prepStatement.executeQuery();
+            while(result.next()){
+                product = new Product();
+                product.setId(result.getInt("id"));
+                product.setProductName(result.getString("product_name"));
+                product.setCost(result.getFloat("cost"));
+                product.setProvider(result.getString("product_provider"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return product;
+    }
+
+
     public void addProduct(Product product){
         String SQL= "INSERT INTO products (product_name,cost,product_provider) values (?,?,?)";
         try {
@@ -65,6 +88,33 @@ public class ProductDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void update(Product updatedProduct, int id){
+        String SQL = "UPDATE products SET product_name =?, cost =?, product_provider =? WHERE id =?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setString(1,updatedProduct.getProductName());
+            preparedStatement.setFloat(2,updatedProduct.getCost());
+            preparedStatement.setString(3,updatedProduct.getProvider());
+            preparedStatement.setInt(4,id);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(int id){
+        String SQL = "DELETE FROM products WHERE id=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SQL);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Info about product</title>
+</head>
+<body>
+<table th:bgcolor="aqua" th:width="500" th:border="1">
+  <caption>Product</caption>
+  <tr>
+    <th>ID</th>
+    <th>Product name</th>
+    <th>Cost </th>
+    <th>Product provider</th>
+  </tr>
+  <tr>
+    <td th:text="${product.getId()}"></td>
+    <td th:text="${product.getProductName()}"></td>
+    <td th:text="${product.getCost()}"></td>
+    <td th:text="${product.getProvider()}"></td>
+  </tr>
+</table>
+<br/>
+
+<form th:method="GET" th:action="@{/products/}">
+  <input type="submit" value=" <- back ">
+</form>
+<br/>
+<form th:method="GET" th:action="@{/products/{id}/edit(id=${product.getId()})}">
+  <input type="submit" value="Edit">
+</form>
+<br/>
+<form th:method="DELETE" th:action="@{/products/{id}(id=${product.getId()})}">
+  <input type="submit" value="DELETE">
+</form>
+
+
+</body>
+</html>
